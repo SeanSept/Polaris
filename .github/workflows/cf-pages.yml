@@ -1,7 +1,5 @@
-name: Deploy static content to Cloudflare Pages
-
+name:  Cloudflare Pages
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
 
@@ -16,28 +14,28 @@ jobs:
       deployments: write
     name: Publish to Cloudflare Pages
     steps:
-      - name: Checkout
+      - name: 获取源码
         uses: actions/checkout@v3
 
       # Run a build step here if your project requires
       # such as hugo, jekyll
 
-      # Rename footer.js to footer-cf.js
-      # Original footer.js is for github pages
-      # you can safely remove this if you don't use my site
-      - name: Replace footer.js
-        run: |
+      # # Rename footer.js to footer-cf.js
+      # # Original footer.js is for github pages
+      # # you can safely remove this if you don't use my site
+      # - name: Replace footer.js
+      #   run: |
 
-          # foreach folder in subfolders
-          for folder in ./site/components/*; do
-            # delete footer.js
-            rm "$folder/footer.js"
+      #     # foreach folder in subfolders
+      #     for folder in ./site/components/*; do
+      #       # delete footer.js
+      #       rm "$folder/footer.js"
 
-            # Rename footer-cf.js as footer.js
-            if [ -e "$folder/footer-cf.js" ]; then
-              mv "$folder/footer-cf.js" "$folder/footer.js"
-            fi
-          done
+      #       # Rename footer-cf.js as footer.js
+      #       if [ -e "$folder/footer-cf.js" ]; then
+      #         mv "$folder/footer-cf.js" "$folder/footer.js"
+      #       fi
+      #     done
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
